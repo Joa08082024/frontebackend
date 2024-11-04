@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Cor de Fundo com Abas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .control-panel {
+            margin: 20px;
+        }
+        #text-box {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #ffffff;
+        }
+        .button-group {
+            margin: 20px;
+        }
+        .tab {
+            display: none;
+        }
+        .tab.active {
+            display: block;
+        }
+        .tab-buttons {
+            margin: 10px 0;
+        }
+        .tab-buttons button {
+            padding: 10px;
+            margin-right: 5px;
+        }
+        pre {
+            background: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="control-panel">
+        <label for="background-color">Escolha uma cor de fundo:</label>
+        <input type="color" id="background-color">
+    </div>
+    
+    <div id="text-box">Este é um texto que pode ser movido.</div>
+    
+    <div class="tab-buttons">
+        <button onclick="showTab('html')">HTML</button>
+        <button onclick="showTab('css')">CSS</button>
+        <button onclick="showTab('js')">JavaScript</button>
+    </div>
+    
+    <div id="html" class="tab active">
+        <pre id="html-code">
+            &lt;!DOCTYPE html&gt;
+            &lt;html lang="pt-BR"&gt;
+            &lt;head&gt;
+                ...
+            &lt;/head&gt;
+            &lt;body&gt;
+                ...
+            &lt;/body&gt;
+            &lt;/html&gt;
+        </pre>
+    </div>
+    
+    <div id="css" class="tab">
+        <pre id="style-code">
+            body {{
+                font-family: Arial, sans-serif;
+                background-color: #f5f5f5;
+            }}
+        </pre>
+    </div>
+    
+    <div id="js" class="tab">
+        <pre id="js-code">
+            document.addEventListener('DOMContentLoaded', function() {{
+                ...
+            }});
+        </pre>
+    </div>
+
+    <script>
+        const body = document.body;
+        const backgroundColorInput = document.getElementById('background-color');
+        const cssCode = document.getElementById('style-code');
+
+        backgroundColorInput.addEventListener('input', function() {
+            const color = backgroundColorInput.value;
+            body.style.backgroundColor = color;
+            // Atualiza o código CSS exibido com a nova cor de fundo
+            cssCode.textContent = `body {\n    background-color: ${color};\n}`;
+        });
+
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
